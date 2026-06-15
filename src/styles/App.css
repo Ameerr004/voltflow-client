@@ -111,6 +111,16 @@
 }
 .brand .material-symbols-outlined { font-size: 32px; }
 .nav-links { display: flex; gap: var(--lg); justify-content: center; white-space: nowrap; }
+
+/* Mobile hamburger (hidden on desktop) */
+.navbar-toggle {
+  display: none;
+  align-items: center; justify-content: center;
+  width: 40px; height: 40px; border: none; border-radius: var(--radius);
+  background: transparent; color: var(--on-surface); cursor: pointer;
+}
+.navbar-toggle:hover { background: var(--surface-container); }
+.nav-backdrop { display: none; }
 .nav-link {
   color: var(--on-surface-variant);
   font-size: 14px;
@@ -582,8 +592,25 @@ tr.row-error { background: rgba(186, 26, 26, 0.06); }
 
 @media (max-width: 600px) {
   /* Navbar wraps: brand + actions on top row, links centered below */
-  .navbar-inner { display: flex; flex-wrap: wrap; gap: var(--sm); padding: var(--sm) var(--md); justify-content: space-between; }
-  .nav-links { position: static; transform: none; order: 3; width: 100%; justify-content: center; gap: var(--lg); }
+  .navbar-inner { padding: var(--sm) var(--md); }
+  .navbar-toggle { display: inline-flex; }
+  /* Links collapse into a dropdown panel under the bar, toggled by the hamburger */
+  .nav-links {
+    position: absolute; top: 100%; left: 0; right: 0;
+    transform: none;
+    flex-direction: column; align-items: stretch; gap: var(--xs);
+    background: var(--surface);
+    border-bottom: 1px solid var(--outline-variant);
+    box-shadow: 0 12px 24px -8px rgba(2, 6, 23, 0.18);
+    padding: var(--sm) var(--md);
+    white-space: normal;
+    display: none;
+    z-index: 60;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links .nav-link { width: 100%; padding: var(--sm) var(--base); border-radius: var(--radius); }
+  .nav-links .nav-link:hover { background: var(--surface-container); }
+  .nav-backdrop { display: block; position: fixed; inset: 0; z-index: 55; }
   .user-greeting { display: none; }
 
   .main { padding: var(--md) var(--md); }

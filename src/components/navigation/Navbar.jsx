@@ -8,12 +8,19 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [navOpen, setNavOpen] = useState(false); // mobile hamburger menu
   const name = user ? user.email.split("@")[0] : null;
 
   const handleLogout = () => {
     setMenuOpen(false);
+    setNavOpen(false);
     logout();
     navigate("/");
+  };
+
+  const go = (path) => {
+    setNavOpen(false);
+    navigate(path);
   };
 
   const linkClass = ({ isActive }) => `nav-link ${isActive ? "active" : ""}`;
@@ -26,13 +33,15 @@ const Navbar = () => {
           <span>VoltFlow</span>
         </div>
 
-        <nav className="nav-links">
-          <NavLink to="/stations" className={linkClass}>Find a Charger</NavLink>
-          {user && <NavLink to="/bookings" className={linkClass}>My Bookings</NavLink>}
-          {user && <NavLink to="/history" className={linkClass}>History</NavLink>}
+        {navOpen && <div className="nav-backdrop" onClick={() => setNavOpen(false)} />}
+
+        <nav className={`nav-links ${navOpen ? "open" : ""}`}>
+          <NavLink to="/stations" className={linkClass} onClick={() => setNavOpen(false)}>Find a Charger</NavLink>
+          {user && <NavLink to="/bookings" className={linkClass} onClick={() => setNavOpen(false)}>My Bookings</NavLink>}
+          {user && <NavLink to="/history" className={linkClass} onClick={() => setNavOpen(false)}>History</NavLink>}
         </nav>
 
-        <div className="flex items-center gap-sm">
+        <div className="nav-actions">
           {user ? (
             <>
               <span className="user-greeting hide-mobile">
@@ -59,10 +68,19 @@ const Navbar = () => {
               </div>
             </>
           ) : (
-            <button className="btn btn-primary" onClick={() => navigate("/signin")}>
+            <button className="btn btn-primary" onClick={() => go("/signin")}>
               Sign In
             </button>
           )}
+
+          <button
+            className="navbar-toggle"
+            aria-label="Toggle navigation"
+            aria-expanded={navOpen}
+            onClick={() => setNavOpen((o) => !o)}
+          >
+            <span className="material-symbols-outlined">{navOpen ? "close" : "menu"}</span>
+          </button>
         </div>
       </div>
     </header>
