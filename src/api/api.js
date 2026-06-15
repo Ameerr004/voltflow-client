@@ -3,7 +3,12 @@
 // base URL and request shape here so every component talks to the backend the
 // same way (the "integration-ready" service layer).
 
-const API_URL = "http://localhost:5001/api";
+// Backend base URL comes from the environment (Vite). Never hardcode it and
+// never put secrets in VITE_* vars — they are bundled into the browser.
+// Falls back to localhost for convenience if the variable is not set.
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5001";
+// Strip any trailing slashes so we never build a broken URL like "//api/...".
+const API_URL = `${SERVER_URL.replace(/\/+$/, "")}/api`;
 
 async function request(path, { method = "GET", body, role } = {}) {
   const headers = { "Content-Type": "application/json" };

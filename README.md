@@ -154,13 +154,25 @@ GET https://api.open-meteo.com/v1/forecast
 
 ## Environment & Configuration
 
-The API base URL is set in `src/api/api.js`:
+The backend URL is **not hardcoded** — it comes from a Vite environment variable. Copy `.env.example` to `.env` and set:
 
-```js
-const API_URL = "http://localhost:5001/api";
+```env
+# Base URL of the backend server (no trailing slash, no /api suffix)
+VITE_SERVER_URL=http://localhost:5001
 ```
 
-The backend must be running (default `http://localhost:5001`). The Vite dev server runs the client on **http://localhost:3000**.
+`src/api/api.js` reads it and appends `/api` (trailing slashes are stripped so the URL is never broken):
+
+```js
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5001";
+const API_URL = `${SERVER_URL.replace(/\/+$/, "")}/api`;
+```
+
+| Variable | Description |
+|---|---|
+| `VITE_SERVER_URL` | Base URL of the backend API server (e.g. `http://localhost:5001` in dev, your hosted URL in production) |
+
+> `.env` is git-ignored; `.env.example` is committed so others know what to set. Vite exposes all `VITE_*` vars to the browser — **never** put secrets there. Restart `npm run dev` after changing `.env`. The Vite dev server runs the client on **http://localhost:3000**.
 
 ---
 
