@@ -89,18 +89,14 @@
   margin: 0 auto;
   padding: var(--sm) var(--gutter);
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
+  column-gap: var(--lg);
 }
-/* Links centered independently of the side widths, so the navbar looks
-   identical whether the user is signed in or signed out. */
-.nav-links {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.navbar-inner > :last-child { display: flex; align-items: center; gap: var(--sm); }
+/* logo | centered links | user — the grid reserves a track for each section,
+   so nothing overlaps and it looks the same signed-in or signed-out. */
+.navbar-inner > :last-child { display: flex; align-items: center; gap: var(--sm); justify-content: flex-end; }
 .brand {
   display: flex;
   align-items: center;
@@ -592,7 +588,7 @@ tr.row-error { background: rgba(186, 26, 26, 0.06); }
 
 @media (max-width: 600px) {
   /* Navbar wraps: brand + actions on top row, links centered below */
-  .navbar-inner { padding: var(--sm) var(--md); }
+  .navbar-inner { display: flex; justify-content: space-between; padding: var(--sm) var(--md); }
   .navbar-toggle { display: inline-flex; }
   /* Links collapse into a dropdown panel under the bar, toggled by the hamburger */
   .nav-links {

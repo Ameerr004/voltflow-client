@@ -8,11 +8,19 @@ const API_URL = "http://localhost:5001/api";
 async function request(path, { method = "GET", body, role } = {}) {
   const headers = { "Content-Type": "application/json" };
   if (role) headers["x-role"] = role; // admin-gated endpoints read this header
-  const res = await fetch(`${API_URL}${path}`, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined,
-  });
+
+  let res;
+  try {
+    res = await fetch(`${API_URL}${path}`, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+  } catch {
+    // Network / server-unreachable errors
+    throw new Error("Cannot reach the server. Please make sure the backend is running.");
+  }
+
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.message || "Request failed");
   return data;

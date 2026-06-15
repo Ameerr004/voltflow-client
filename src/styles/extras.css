@@ -45,6 +45,15 @@
 .c-secondary { color: var(--secondary); }
 .c-error { color: var(--error); }
 
+/* ---------- ErrorBoundary fallback ---------- */
+.error-fallback {
+  min-height: 70vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  gap: var(--sm); padding: var(--xl);
+}
+.error-fallback-icon { font-size: 56px; color: var(--error); }
+.error-fallback .btn { margin-top: var(--sm); }
+
 /* ---------- Sidebar brand ---------- */
 .sidebar-brand { padding: var(--base); margin-bottom: var(--md); }
 .sidebar-brand-icon { height: 32px; width: 32px; margin: 0; }
