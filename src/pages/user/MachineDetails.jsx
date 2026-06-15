@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 import { getStation, getSlots, bookSlot } from "../../api/api";
 import { useAuth } from "../../auth/AuthContext.jsx";
 import { nextDays, isoDate, dayLabel, dayNum, nowHHMM } from "../../utils/dates";
@@ -68,15 +69,15 @@ const MachineDetails = () => {
           <p className="body-lg text-secondary">Select an available time slot for your charge.</p>
         </div>
 
-        {/* Login warning */}
+        {/* Login warning (React-Bootstrap Alert) */}
         {!user && warnLogin && (
-          <div className="warn-banner">
-            <span className="left">
+          <Alert variant="warning" className="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <span className="d-flex align-items-center gap-2">
               <span className="material-symbols-outlined">warning</span>
               Please sign in first to book a slot.
             </span>
             <button className="btn btn-primary" onClick={() => navigate("/signin")}>Log In</button>
-          </div>
+          </Alert>
         )}
 
         {/* Status card */}

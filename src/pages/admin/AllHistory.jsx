@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { getAllHistory } from "../../api/api";
 import { useAuth } from "../../auth/AuthContext.jsx";
 import { fmtFull } from "../../utils/dates";
@@ -9,10 +10,14 @@ const initials = (email) => (email ? email.slice(0, 2).toUpperCase() : "??");
 const AllHistory = () => {
   const { user } = useAuth();
   const [history, setHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const role = user?.role || "admin";
-    getAllHistory(role).then(setHistory).catch((err) => console.error(err));
+    getAllHistory(role)
+      .then(setHistory)
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, [user]);
 
   const uniqueUsers = new Set(history.map((b) => b.booked_by)).size;
@@ -31,6 +36,13 @@ const AllHistory = () => {
       </header>
 
       <div className="admin-content flex-col gap-lg">
+        {loading ? (
+          <div className="d-flex justify-content-center py-5">
+            <Spinner animation="border" variant="primary" role="status">
+              <span className="visually-hidden">Loading history…</span>
+            </Spinner>
+          </div>
+        ) : (
         <div className="table-wrap">
           <table>
             <thead>
@@ -67,6 +79,7 @@ const AllHistory = () => {
             </tbody>
           </table>
         </div>
+        )}
       </div>
     </div>
   );

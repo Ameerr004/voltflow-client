@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { getUserBookings, cancelBooking } from "../../api/api";
 import { useAuth } from "../../auth/AuthContext.jsx";
 import { fmtFull } from "../../utils/dates";
@@ -7,10 +8,15 @@ import { fmtFull } from "../../utils/dates";
 const MyBookings = () => {
   const { user } = useAuth();
   const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const load = () => {
     if (!user) return;
-    getUserBookings(user.email).then(setBookings).catch((err) => console.error(err));
+    setLoading(true);
+    getUserBookings(user.email)
+      .then(setBookings)
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   };
 
   useEffect(load, [user]);
@@ -27,6 +33,13 @@ const MyBookings = () => {
         <p className="body-lg text-muted">Manage your upcoming EV charging reservations.</p>
       </div>
 
+      {loading ? (
+        <div className="d-flex justify-content-center py-5">
+          <Spinner animation="border" variant="primary" role="status">
+            <span className="visually-hidden">Loading bookings…</span>
+          </Spinner>
+        </div>
+      ) : (
       <div className="table-wrap">
         <table>
           <thead>
@@ -64,6 +77,7 @@ const MyBookings = () => {
           </tbody>
         </table>
       </div>
+      )}
     </main>
   );
 };

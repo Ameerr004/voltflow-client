@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import WeatherWidget from "../../components/WeatherWidget.jsx";
 import "./Landing.css";
 
 const STATS = [
@@ -58,6 +59,7 @@ const Landing = () => {
           </div>
 
           <div className="hero-visual">
+            <WeatherWidget />
             <div className="net-hub">
               <span className="net-ring r1" />
               <span className="net-ring r2" />

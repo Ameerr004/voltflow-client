@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Row, Col } from "react-bootstrap";
 import "./About.css";
 
 const STATS = [
@@ -75,17 +76,19 @@ const About = () => {
           <h2 className="headline-lg">What We Stand For</h2>
           <p className="body-lg text-muted">The principles behind every station we build.</p>
         </div>
-        <div className="grid-2">
+        <Row className="g-4">
           {VALUES.map((v) => (
-            <div key={v.title} className="glass-card value-card">
-              <div className="value-icon"><span className="material-symbols-outlined">{v.icon}</span></div>
-              <div className="flex-col gap-xs">
-                <h3 className="title-lg">{v.title}</h3>
-                <p className="body-md text-muted">{v.text}</p>
+            <Col md={6} key={v.title}>
+              <div className="glass-card value-card h-100">
+                <div className="value-icon"><span className="material-symbols-outlined">{v.icon}</span></div>
+                <div className="flex-col gap-xs">
+                  <h3 className="title-lg">{v.title}</h3>
+                  <p className="body-md text-muted">{v.text}</p>
+                </div>
               </div>
-            </div>
+            </Col>
           ))}
-        </div>
+        </Row>
       </section>
 
       {/* Timeline / story */}

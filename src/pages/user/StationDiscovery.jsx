@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Row, Col, Spinner } from "react-bootstrap";
 import StationCard from "../../components/station/StationCard.jsx";
 import { getStations } from "../../api/api";
 
@@ -12,9 +13,13 @@ const IMAGES = [
 const StationDiscovery = () => {
   const navigate = useNavigate();
   const [stations, setStations] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getStations().then(setStations).catch((err) => console.error(err));
+    getStations()
+      .then(setStations)
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
   const onlineCount = stations.filter((s) => s.status === "online").length;
@@ -28,17 +33,26 @@ const StationDiscovery = () => {
         </p>
       </div>
 
-      <section className="station-grid">
-        {stations.map((station, i) => (
-          <StationCard
-            key={station.id}
-            station={station}
-            image={station.image_url || IMAGES[i % IMAGES.length]}
-            onSelect={(s) => navigate(`/stations/${s.id}`)}
-          />
-        ))}
-        {stations.length === 0 && <p className="text-muted">No stations available. Start the API and seed the database.</p>}
-      </section>
+      {loading ? (
+        <div className="d-flex justify-content-center py-5">
+          <Spinner animation="border" variant="primary" role="status">
+            <span className="visually-hidden">Loading stations…</span>
+          </Spinner>
+        </div>
+      ) : (
+        <Row className="g-4">
+          {stations.map((station, i) => (
+            <Col key={station.id} xs={12} md={6} lg={4}>
+              <StationCard
+                station={station}
+                image={station.image_url || IMAGES[i % IMAGES.length]}
+                onSelect={(s) => navigate(`/stations/${s.id}`)}
+              />
+            </Col>
+          ))}
+          {stations.length === 0 && <p className="text-muted">No stations available. Start the API and seed the database.</p>}
+        </Row>
+      )}
     </main>
   );
 };

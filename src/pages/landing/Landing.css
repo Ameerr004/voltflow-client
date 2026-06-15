@@ -60,7 +60,24 @@
 .hero-actions { display: flex; gap: var(--sm); margin-top: var(--sm); flex-wrap: wrap; }
 
 /* ---- Hero visual: animated EV charging-network hub (replaces the photo) ---- */
-.hero-visual { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 460px; }
+.hero-visual { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; min-height: 460px; }
+
+/* Live weather card (Open-Meteo API) floating over the hub */
+.weather-card {
+  position: absolute; top: 6px; right: 6px; z-index: 5;
+  padding: var(--sm) var(--md);
+  display: flex; flex-direction: column; gap: 2px; min-width: 156px;
+}
+.weather-loc { font-size: 12px; color: var(--secondary); display: flex; align-items: center; gap: 4px; }
+.weather-loc .material-symbols-outlined { color: var(--primary); }
+.weather-main { display: flex; align-items: center; gap: var(--sm); }
+.weather-icon { font-size: 30px; line-height: 1; }
+.weather-temp {
+  font-size: 28px; font-weight: 800; line-height: 1;
+  background: linear-gradient(90deg, var(--primary), #06b6d4);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.weather-desc { font-size: 12px; color: var(--secondary); }
 .net-hub { position: relative; width: min(460px, 90%); aspect-ratio: 1; }
 
 /* Pulsing concentric rings radiating from the core */
