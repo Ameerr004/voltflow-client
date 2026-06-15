@@ -3,10 +3,12 @@
 // base URL and request shape here so every component talks to the backend the
 // same way (the "integration-ready" service layer).
 
-// Backend base URL comes from the environment (Vite). Never hardcode it and
-// never put secrets in VITE_* vars — they are bundled into the browser.
-// Falls back to localhost for convenience if the variable is not set.
-const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5001";
+// Backend base URL comes ONLY from the environment (Vite) — no hardcoded URL.
+// Never put secrets in VITE_* vars; they are bundled into the browser.
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || "";
+if (!SERVER_URL) {
+  console.warn("VITE_SERVER_URL is not set — API calls will fail. Copy .env.example to .env and set it.");
+}
 // Strip any trailing slashes so we never build a broken URL like "//api/...".
 const API_URL = `${SERVER_URL.replace(/\/+$/, "")}/api`;
 
