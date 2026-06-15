@@ -1,0 +1,83 @@
+/* =========================================================================
+   About Us page — dedicated external stylesheet (imported by About.jsx).
+   Reuses the global design system; only About-specific layout lives here.
+   ========================================================================= */
+
+.about { padding-top: var(--lg); }
+
+/* ---------------- Hero ---------------- */
+.about-hero {
+  display: flex; flex-direction: column; gap: var(--md);
+  align-items: center; text-align: center;
+  max-width: 52rem; margin: 0 auto; padding: var(--lg) 0;
+}
+.about-lead { max-width: 40rem; }
+.about-hero-actions { display: flex; gap: var(--sm); flex-wrap: wrap; justify-content: center; margin-top: var(--sm); }
+
+/* ---------------- Stats band ---------------- */
+.about-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--md);
+  padding: var(--lg); border-radius: var(--radius-2xl);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(6, 182, 212, 0.06));
+  border: 1px solid var(--surface-container-highest);
+}
+.about-stat { text-align: center; }
+.about-stat-num {
+  font-size: 38px; font-weight: 800; line-height: 1;
+  background: linear-gradient(90deg, var(--primary), #06b6d4);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.about-stat-label { font-size: 13px; color: var(--secondary); margin-top: 6px; }
+
+/* ---------------- Mission ---------------- */
+.about-mission {
+  display: flex; gap: var(--lg); align-items: center; padding: var(--lg);
+}
+.about-mission-icon {
+  flex-shrink: 0; height: 88px; width: 88px; border-radius: var(--radius-xl);
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--primary), #1e3a8a);
+  box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.5);
+}
+.about-mission-icon .material-symbols-outlined { font-size: 44px; color: #fff; }
+
+/* ---------------- Values ---------------- */
+.value-card {
+  display: flex; gap: var(--md); align-items: flex-start; padding: var(--md);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.value-card:hover { transform: translateY(-4px); border-color: rgba(37, 99, 235, 0.3); }
+.value-icon {
+  flex-shrink: 0; height: 52px; width: 52px; border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.2);
+}
+.value-icon .material-symbols-outlined { font-size: 28px; color: var(--primary); }
+
+/* ---------------- Timeline ---------------- */
+.about-timeline {
+  position: relative; display: flex; flex-direction: column; gap: var(--lg);
+  padding-left: var(--xl);
+}
+.about-timeline::before {
+  content: ""; position: absolute; top: 6px; bottom: 6px; left: 7px;
+  width: 2px; background: linear-gradient(var(--primary), transparent);
+}
+.timeline-item { position: relative; display: flex; align-items: flex-start; gap: var(--md); flex-wrap: wrap; }
+.timeline-dot {
+  position: absolute; left: calc(-1 * var(--xl) + 1px); top: 6px;
+  height: 16px; width: 16px; border-radius: 50%;
+  background: var(--primary); border: 3px solid var(--surface);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+.timeline-year {
+  flex-shrink: 0; min-width: 64px; font-weight: 800; font-size: 20px; color: var(--primary);
+}
+.timeline-card { flex: 1; min-width: 240px; padding: var(--md); display: flex; flex-direction: column; gap: var(--xs); }
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+  .about-stats { grid-template-columns: repeat(2, 1fr); }
+  .about-mission { flex-direction: column; text-align: center; }
+  .grid-2 { grid-template-columns: 1fr; }
+}

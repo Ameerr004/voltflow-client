@@ -1,0 +1,234 @@
+/* =========================================================================
+   Landing page styles (dedicated external stylesheet, imported by Landing.jsx).
+   ========================================================================= */
+
+/* Decorative animated page background — subtle ambient energy network across
+   the whole light page (drifting particles + a slow energy sweep + glow). */
+.landing-bg {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+  background:
+    radial-gradient(ellipse 60% 50% at 85% -5%, rgba(37, 99, 235, 0.14), transparent 60%),
+    radial-gradient(ellipse 50% 45% at -5% 8%, rgba(6, 182, 212, 0.10), transparent 60%);
+}
+/* Drifting light-particle field */
+.landing-bg::before {
+  content: ""; position: absolute; inset: -20%;
+  background-image: radial-gradient(rgba(37, 99, 235, 0.10) 1px, transparent 1.7px);
+  background-size: 54px 54px;
+  animation: particleDrift 34s linear infinite;
+}
+/* Slow electric-blue energy sweep gliding across the page */
+.landing-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(115deg, transparent 44%, rgba(56, 189, 248, 0.09) 50%, transparent 56%);
+  animation: pulseSweep 18s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-bg::before, .landing-bg::after { animation: none; }
+}
+
+/* Slow-drifting aurora energy orbs — soft blue/cyan glows that float & breathe */
+.landing-orbs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.landing-orbs::before,
+.landing-orbs::after { content: ""; position: absolute; border-radius: 50%; filter: blur(24px); }
+.landing-orbs::before {
+  width: 44vw; height: 44vw; top: -12vw; right: -8vw;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.18), transparent 68%);
+  animation: orbFloatA 22s ease-in-out infinite;
+}
+.landing-orbs::after {
+  width: 38vw; height: 38vw; bottom: -14vw; left: -10vw;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.16), transparent 68%);
+  animation: orbFloatB 27s ease-in-out infinite;
+}
+@keyframes orbFloatA {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-6%, 9%) scale(1.12); }
+}
+@keyframes orbFloatB {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(9%, -7%) scale(1.1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-orbs::before, .landing-orbs::after { animation: none; }
+}
+
+/* ---------------- Hero ---------------- */
+.hero { position: relative; display: flex; align-items: center; justify-content: space-between; gap: var(--xl); min-height: 540px; }
+.hero-copy { position: relative; z-index: 2; max-width: 560px; display: flex; flex-direction: column; gap: var(--md); }
+.hero-lead { max-width: 32rem; }
+.hero-actions { display: flex; gap: var(--sm); margin-top: var(--sm); flex-wrap: wrap; }
+
+/* ---- Hero visual: animated EV charging-network hub (replaces the photo) ---- */
+.hero-visual { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 460px; }
+.net-hub { position: relative; width: min(460px, 90%); aspect-ratio: 1; }
+
+/* Pulsing concentric rings radiating from the core */
+.net-ring {
+  position: absolute; top: 50%; left: 50%;
+  border-radius: 50%; border: 1px solid rgba(37, 99, 235, 0.35);
+  transform: translate(-50%, -50%);
+  animation: netPulse 3.2s ease-out infinite;
+}
+.net-ring.r1 { width: 46%; height: 46%; }
+.net-ring.r2 { width: 72%; height: 72%; animation-delay: 0.7s; }
+.net-ring.r3 { width: 98%; height: 98%; animation-delay: 1.4s; }
+
+/* Dashed orbit carrying the station pins, slowly rotating */
+.net-orbit {
+  position: absolute; top: 50%; left: 50%; width: 78%; height: 78%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%; border: 1px dashed rgba(37, 99, 235, 0.3);
+  animation: netSpin 24s linear infinite;
+}
+.net-pin {
+  position: absolute; width: 46px; height: 46px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface); color: var(--primary);
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.12);
+  animation: netSpinRev 24s linear infinite;
+}
+.net-pin .material-symbols-outlined { font-size: 24px; }
+.net-pin.p1 { top: -23px; left: calc(50% - 23px); }
+.net-pin.p2 { right: -23px; top: calc(50% - 23px); }
+.net-pin.p3 { bottom: -23px; left: calc(50% - 23px); }
+.net-pin.p4 { left: -23px; top: calc(50% - 23px); }
+
+/* Glowing charging core at the centre */
+.net-core {
+  position: absolute; top: 50%; left: 50%; width: 104px; height: 104px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 50% 38%, #3b82f6, #1e3a8a);
+  box-shadow: 0 0 44px rgba(37, 99, 235, 0.6), inset 0 0 22px rgba(255, 255, 255, 0.25);
+  animation: netCore 2.6s ease-in-out infinite;
+}
+.net-core .material-symbols-outlined { font-size: 52px; color: #fff; }
+
+/* Drifting energy sparks near the core */
+.net-spark {
+  position: absolute; width: 8px; height: 8px; border-radius: 50%;
+  background: #7df4ff; box-shadow: 0 0 10px 2px rgba(125, 244, 255, 0.8);
+}
+.net-spark.s1 { top: 30%; left: 24%; animation: netSpark 4s ease-in-out infinite; }
+.net-spark.s2 { bottom: 26%; right: 22%; animation: netSpark 5.2s ease-in-out infinite 1.3s; }
+
+@keyframes netPulse {
+  0%   { opacity: 0.55; transform: translate(-50%, -50%) scale(0.85); }
+  70%  { opacity: 0; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.08); }
+}
+@keyframes netSpin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes netSpinRev { to { transform: rotate(-360deg); } }
+@keyframes netCore {
+  0%, 100% { box-shadow: 0 0 30px rgba(37, 99, 235, 0.5), inset 0 0 22px rgba(255, 255, 255, 0.25); }
+  50%      { box-shadow: 0 0 58px rgba(37, 99, 235, 0.85), inset 0 0 22px rgba(255, 255, 255, 0.3); }
+}
+@keyframes netSpark {
+  0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+  50%      { transform: translate(10px, -14px); opacity: 1; }
+}
+
+/* Kept — used by the animated page background (.landing-bg) */
+@keyframes pulseSweep {
+  from { transform: translateX(-120%); }
+  to   { transform: translateX(120%); }
+}
+@keyframes particleDrift {
+  from { background-position: 0 0; }
+  to   { background-position: 120px -180px; }
+}
+
+/* Respect reduced-motion — freeze the hub */
+@media (prefers-reduced-motion: reduce) {
+  .net-ring, .net-orbit, .net-pin, .net-core, .net-spark { animation: none; }
+}
+
+/* Animated shimmering gradient on the highlighted word */
+.gradient-text {
+  background: linear-gradient(90deg, var(--primary), #06b6d4);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.gradient-animate {
+  background: linear-gradient(90deg, var(--primary), #06b6d4, #22d3ee, var(--primary));
+  background-size: 250% auto;
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  animation: voltShimmer 4s linear infinite;
+}
+@keyframes voltShimmer {
+  to { background-position: 250% center; }
+}
+
+/* Hero stat strip */
+.hero-stats {
+  display: flex; gap: var(--lg); margin-top: var(--md); flex-wrap: wrap;
+  padding-top: var(--md); border-top: 1px solid var(--surface-container-highest);
+}
+.hero-stat .num { font-size: 28px; font-weight: 800; line-height: 1; }
+.hero-stat .num span {
+  background: linear-gradient(90deg, var(--primary), #06b6d4);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-stat .lbl { font-size: 13px; color: var(--secondary); margin-top: 4px; }
+
+/* ---------------- Sections (specs / steps / locations) ---------------- */
+.section { display: flex; flex-direction: column; gap: var(--lg); margin-top: var(--xl); }
+.section-head { display: flex; flex-direction: column; gap: var(--xs); align-items: center; text-align: center; }
+
+.spec-card { display: flex; flex-direction: column; gap: var(--sm); padding: var(--md); transition: transform 0.3s, border-color 0.3s; }
+.spec-card:hover { transform: translateY(-4px); border-color: rgba(37, 99, 235, 0.3); }
+.spec-icon {
+  height: 56px; width: 56px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--sm);
+}
+.spec-icon .material-symbols-outlined { font-size: 30px; color: var(--primary); }
+
+.steps { display: flex; gap: var(--xl); width: 100%; max-width: 64rem; margin: 0 auto; }
+.step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: var(--sm); text-align: center; }
+.step-num {
+  height: 80px; width: 80px; border-radius: 50%;
+  background: var(--surface-container-lowest);
+  border: 1px solid rgba(37, 99, 235, 0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; font-weight: 700; color: var(--primary);
+}
+.location-card { padding: var(--md); display: flex; flex-direction: column; gap: var(--sm); position: relative; overflow: hidden; }
+
+/* ---------------- Call-to-action banner ---------------- */
+.cta-banner {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--primary), #1e3a8a);
+  border-radius: var(--radius-2xl);
+  padding: var(--xl) var(--lg);
+  margin-top: var(--xl);
+  text-align: center; color: #fff;
+  display: flex; flex-direction: column; align-items: center; gap: var(--sm);
+}
+.cta-banner::before {
+  content: ""; position: absolute; top: -50%; right: -8%;
+  width: 45%; height: 200%; background: rgba(255, 255, 255, 0.08); border-radius: 50%;
+}
+.cta-banner::after {
+  content: ""; position: absolute; bottom: -60%; left: -5%;
+  width: 35%; height: 180%; background: rgba(255, 255, 255, 0.06); border-radius: 50%;
+}
+.cta-banner > * { position: relative; z-index: 1; }
+.cta-eyebrow { color: rgba(255, 255, 255, 0.8); }
+.cta-sub { color: rgba(255, 255, 255, 0.85); max-width: 40rem; }
+.cta-banner .btn-light { background: #fff; color: var(--primary); margin-top: var(--sm); }
+.cta-banner .btn-light:hover { background: #eef2ff; }
+.cta-banner .btn-light .material-symbols-outlined { font-size: 18px; }
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+  .hero { flex-direction: column; align-items: flex-start; min-height: 0; gap: var(--lg); }
+  .hero-visual { width: 100%; min-height: 320px; }
+  .net-hub { width: min(320px, 80%); }
+  .steps { flex-direction: column; gap: var(--lg); }
+}

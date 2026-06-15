@@ -1,0 +1,144 @@
+/* =========================================================================
+   extras.css — external replacements for former inline style={} attributes.
+   Keeps all styling in CSS (no internal/inline styles in the JSX). Only truly
+   dynamic, data-driven values (bar heights, progress widths, a data background
+   image) remain inline, since static CSS cannot express per-record values.
+   ========================================================================= */
+
+/* ---------- Generic helpers ---------- */
+.clickable { cursor: pointer; }
+.block { display: block; }
+.flex-1 { flex: 1; }
+.mt-auto { margin-top: auto; }
+.lh-1 { line-height: 1; }
+
+.fw-400 { font-weight: 400; }
+.fw-500 { font-weight: 500; }
+.fw-600 { font-weight: 600; }
+.fw-800 { font-weight: 800; }
+
+.mt-sm { margin-top: var(--sm); }
+.mt-md { margin-top: var(--md); }
+.mb-xs { margin-bottom: var(--xs); }
+.mb-sm { margin-bottom: var(--sm); }
+.mb-md { margin-bottom: var(--md); }
+.mb-lg { margin-bottom: var(--lg); }
+.pt-base { padding-top: var(--base); }
+.pl-sm { padding-left: var(--sm); }
+.pad-lg { padding: var(--lg); }
+
+.font-mono { font-family: var(--font-mono); }
+
+/* Material icon size + alignment helpers */
+.mi-10 { font-size: 10px; }
+.mi-14 { font-size: 14px; }
+.mi-16 { font-size: 16px; }
+.mi-18 { font-size: 18px; }
+.mi-20 { font-size: 20px; }
+.mi-mid { vertical-align: middle; }
+
+/* Icon / text colour helpers */
+.ic-primary { color: var(--primary); }
+.ic-secondary { color: var(--secondary); }
+.ic-tertiary { color: var(--tertiary); }
+.c-primary { color: var(--primary); }
+.c-secondary { color: var(--secondary); }
+.c-error { color: var(--error); }
+
+/* ---------- Sidebar brand ---------- */
+.sidebar-brand { padding: var(--base); margin-bottom: var(--md); }
+.sidebar-brand-icon { height: 32px; width: 32px; margin: 0; }
+
+/* ---------- Auth (SignIn / SignUp) ---------- */
+.auth-brand-name { color: var(--on-surface); }
+.auth-hero-text { max-width: 28rem; }
+.link-bold { cursor: pointer; font-weight: 600; }
+
+/* ---------- Admin dashboard ---------- */
+.metric-badge { background: var(--primary-container); padding: 2px 8px; border-radius: var(--radius); }
+.section-underline { border-bottom: 1px solid var(--outline-variant); padding-bottom: var(--sm); }
+.title-accent { width: 4px; height: 24px; background: var(--primary); border-radius: var(--radius-full); }
+.metric-xl { font-size: 64px; }
+.metric-lg { font-size: 40px; }
+
+/* ---------- My Bookings (creative) ---------- */
+.stat-ring-plain { border: none; background: var(--surface-container-highest); }
+
+/* ---------- Machine details ---------- */
+.station-name { font-size: 40px; line-height: 1; }
+.spec-key { display: block; font-size: 10px; }
+
+/* ---------- Peak-forecast panel (enhanced overview) ---------- */
+.forecast-card { background: linear-gradient(135deg, #122131, #051424); color: #fff; padding: var(--md); }
+.forecast-eyebrow { color: #b9cacb; }
+.forecast-icon { font-size: 18px; vertical-align: middle; color: #00dbe9; }
+.forecast-peak { color: #fff; margin-top: var(--sm); }
+.forecast-sub { color: #849495; }
+.forecast-bars { height: 80px; margin-top: var(--md); }
+.forecast-bar { flex: 1; border-radius: 4px 4px 0 0; background: #273647; }
+.forecast-bar.peak { background: #7df4ff; }
+
+/* ---------- Reservations table avatar ---------- */
+.avatar-primary { background: var(--primary-container); color: var(--on-primary-container); }
+
+/* Fleet-health mini sparkline (static decorative bar heights) */
+.bars span:nth-child(1) { height: 40%; opacity: 0.64; }
+.bars span:nth-child(2) { height: 60%; opacity: 0.76; }
+.bars span:nth-child(3) { height: 35%; opacity: 0.61; }
+.bars span:nth-child(4) { height: 70%; opacity: 0.82; }
+.bars span:nth-child(5) { height: 55%; opacity: 0.73; }
+.bars span:nth-child(6) { height: 90%; opacity: 0.94; }
+
+/* ---------- Register/Edit unit photo upload + preview ---------- */
+.file-input {
+  width: 100%; padding: var(--sm); border-radius: var(--radius-lg);
+  border: 1px dashed var(--outline-variant); background: var(--surface-container-lowest);
+  color: var(--on-surface); cursor: pointer; font-size: 14px;
+}
+.file-input::file-selector-button {
+  margin-right: var(--sm); padding: 6px 12px; border: none; border-radius: var(--radius);
+  background: var(--primary-container); color: var(--on-primary-container);
+  font-weight: 600; cursor: pointer;
+}
+.file-input::file-selector-button:hover { filter: brightness(0.97); }
+
+.unit-img-preview {
+  position: relative; margin-top: var(--xs); border-radius: var(--radius-lg);
+  overflow: hidden; border: 1px solid var(--surface-container-highest); max-height: 160px;
+}
+.unit-img-preview img { width: 100%; height: 160px; object-fit: cover; display: block; }
+.img-remove {
+  position: absolute; top: 8px; right: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(2, 6, 23, 0.6); color: #fff;
+}
+.img-remove:hover { background: rgba(2, 6, 23, 0.8); }
+
+/* ---------- Slot edit / delete controls (manage machines booking grid) ---------- */
+.slot-mini { position: relative; }
+.slot-mini-actions {
+  position: absolute; top: 4px; right: 4px; display: flex; gap: 3px;
+  opacity: 0; transition: opacity 0.15s;
+}
+.slot-mini:hover .slot-mini-actions { opacity: 1; }
+.slot-act {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 7px; border: none; cursor: pointer;
+  background: var(--surface-container-high); color: var(--secondary);
+  transition: background 0.15s, color 0.15s;
+}
+.slot-act:hover { background: var(--primary-container); color: var(--primary); }
+.slot-act.danger:hover { background: var(--error-container); color: var(--error); }
+.slot-act.save { background: var(--primary); color: #fff; }
+.slot-act.save:hover { background: var(--primary); filter: brightness(1.08); }
+.slot-edit { display: flex; flex-direction: column; gap: 5px; width: 100%; }
+.slot-edit .glass-input { padding: 5px 7px; font-size: 12px; }
+.slot-edit-actions { display: flex; gap: 5px; justify-content: center; }
+.slot-mini.editing { cursor: default; }
+
+/* ---------- Fleet stat icon boxes (manage machines) ---------- */
+.box-primary { background: var(--primary-container); color: var(--on-primary-container); }
+.box-solid-primary { background: var(--primary); color: #fff; }
+.box-error { background: var(--error-container); color: var(--error); }
+.box-surface { background: var(--surface-container-high); color: var(--primary); }
