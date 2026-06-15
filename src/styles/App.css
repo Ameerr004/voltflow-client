@@ -75,6 +75,7 @@
 
 /* ---------------- Navbar ---------------- */
 .navbar {
+  display: block; /* override Bootstrap's .navbar flex so .navbar-inner spans full width */
   position: sticky;
   top: 0;
   z-index: 50;
@@ -83,6 +84,7 @@
   border-bottom: 1px solid var(--outline-variant);
 }
 .navbar-inner {
+  width: 100%;
   max-width: var(--max-w);
   margin: 0 auto;
   padding: var(--sm) var(--gutter);
