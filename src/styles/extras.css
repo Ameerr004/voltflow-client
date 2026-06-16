@@ -54,6 +54,26 @@
 .error-fallback-icon { font-size: 56px; color: var(--error); }
 .error-fallback .btn { margin-top: var(--sm); }
 
+/* ---------- Stations map (Leaflet + OpenStreetMap) ---------- */
+.stations-map {
+  height: 380px; border-radius: var(--radius-xl); overflow: hidden;
+  border: 1px solid var(--surface-container-highest); box-shadow: var(--shadow-sm);
+}
+.stations-map-inner { height: 100%; width: 100%; }
+.stations-map-loading {
+  height: 120px; display: flex; align-items: center; justify-content: center;
+  color: var(--secondary);
+}
+.vf-pin { background: transparent; border: none; }
+.vf-pin-dot {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--primary); color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.vf-pin-dot .material-symbols-outlined { transform: rotate(45deg); font-size: 20px; }
+
 /* ---------- Sidebar brand ---------- */
 .sidebar-brand { padding: var(--base); margin-bottom: var(--md); }
 .sidebar-brand-icon { height: 32px; width: 32px; margin: 0; }
