@@ -21,7 +21,9 @@ const WeatherWidget = () => {
   const [current, setCurrent] = useState(null);
 
   useEffect(() => {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weather_code,wind_speed_10m&timezone=auto`;
+    // Third-party weather API base URL comes from the environment (Vite).
+    const base = import.meta.env.VITE_WEATHER_API_URL || "https://api.open-meteo.com/v1/forecast";
+    const url = `${base}?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weather_code,wind_speed_10m&timezone=auto`;
     fetch(url)
       .then((r) => r.json())
       .then((d) => setCurrent(d.current))
