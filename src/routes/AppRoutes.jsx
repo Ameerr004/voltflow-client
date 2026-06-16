@@ -9,7 +9,6 @@ import SignUp from "../pages/auth/SignUp.jsx";
 import StationDiscovery from "../pages/user/StationDiscovery.jsx";
 import MachineDetails from "../pages/user/MachineDetails.jsx";
 import MyBookings from "../pages/user/MyBookings.jsx";
-import MyBookingsCreative from "../pages/user/MyBookingsCreative.jsx";
 import BookingHistory from "../pages/user/BookingHistory.jsx";
 import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
 import AdminDashboardEnhanced from "../pages/admin/AdminDashboardEnhanced.jsx";
@@ -34,7 +33,6 @@ export default function AppRoutes() {
         {/* Bookings + history require any signed-in user */}
         <Route element={<RequireRole />}>
           <Route path="/bookings" element={<MyBookings />} />
-          <Route path="/bookings/cards" element={<MyBookingsCreative />} />
           <Route path="/history" element={<BookingHistory />} />
         </Route>
       </Route>
