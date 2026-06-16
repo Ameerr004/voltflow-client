@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Row, Col, Spinner } from "react-bootstrap";
 import StationCard from "../../components/station/StationCard.jsx";
-import StationsMap from "../../components/StationsMap.jsx";
 import { getStations } from "../../api/api";
 
 const IMAGES = [
@@ -33,8 +32,6 @@ const StationDiscovery = () => {
           Find and reserve high-speed chargers near you — {onlineCount} of {stations.length} online now.
         </p>
       </div>
-
-      {!loading && stations.length > 0 && <StationsMap stations={stations} />}
 
       {loading ? (
         <div className="d-flex justify-content-center py-5">
