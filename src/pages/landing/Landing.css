@@ -62,7 +62,7 @@
 /* ---- Hero visual: animated EV charging-network hub (replaces the photo) ---- */
 .hero-visual { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; min-height: 460px; }
 
-/* Live weather card (Open-Meteo API) floating over the hub */
+/* Live weather card (WeatherAPI.com) floating over the hub */
 .weather-card {
   position: absolute; top: 6px; right: 6px; z-index: 5;
   padding: var(--sm) var(--md);
