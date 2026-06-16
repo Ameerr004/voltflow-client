@@ -327,6 +327,10 @@
   backdrop-filter: blur(4px);
 }
 .modal {
+  /* explicit display/position/height override Bootstrap's .modal (display:none, position:fixed) */
+  display: block;
+  position: relative;
+  height: auto;
   background: var(--surface-container-lowest);
   border: 1px solid var(--outline-variant);
   border-radius: var(--radius-xl);
